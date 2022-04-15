@@ -20,7 +20,8 @@ As an alteranative you can pass the date you want ex:
 ./vendor/bin/sail artisan mail:birthday 2022-12-12
 ```
 
-[a link] (http://127.0.0.1:8025/)
+
+# You can check the sent e-mails on MailHog using the link:  http://127.0.0.1:8025/
 
 
 
