@@ -36,7 +36,7 @@ class EmployeesMailService
         $mailsSent = [];
         foreach ($employees as $employee) {
             //Check if employee is on exclusion list or if it was already notified for this year's birthday
-            if (!in_array($employee->getId(), $exclusionList) && ($employee->getLastBirthdayNotified() == null || $employee->getLastBirthdayNotified()->format("Y") != date("Y", $dateInTs)) ) {
+            if (!in_array($employee->getId(), $exclusionList) && ($employee->getLastBirthdayNotified() == null || $employee->getLastBirthdayNotified()->format('Y') != $dateObj->format('Y') ) {
 
                 $email = sprintf("%s@%s", strtolower($employee->getName()),self::MAIL_DOMAIN);
                 
