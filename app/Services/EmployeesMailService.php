@@ -21,11 +21,11 @@ class EmployeesMailService
 
     public function birthdayMail($date)
     {
-        $fullDate = $date;
-        $dateInTs = strtotime($date);
-        $dates = [date('m-d', $dateInTs)];
+        $dateObj = \DateTime::createFromFormat('Y-m-d','2022-02-28');
+        $dates = [$dateObj->format('m-d')];
+
         //If date is 28th of February and this is not a leap year 29th of February will be included on the search
-        if (date('m-d', $dateInTs) == '02-28' && !date('L', $dateInTs)) {
+        if ($dateObj->format('m-d') == '02-28' && !$dateObj->format('L')) {
             $dates[] = '02-29';
         }
 
@@ -42,7 +42,7 @@ class EmployeesMailService
                 
                 Mail::to($email)->send(new \App\Mail\BirthdayMail($employee->getName()));
 
-                $this->repository->updateLastBirthdayNotified($employee->getId(), $fullDate);
+                $this->repository->updateLastBirthdayNotified($employee->getId(), $date);
                 
                 $mailsSent[] = $employee;
             }
